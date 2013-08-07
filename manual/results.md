@@ -15,7 +15,7 @@ type Result interface {
 [`revel.Controller`](../docs/godoc/controller.html#Controller) provides a couple
 methods to produce Results:
 * Render, RenderTemplate - render a template, passing arguments.
-* RenderJson, RenderXml - serialize a structure to json or xml.
+* RenderJson, RenderJsonP, RenderXml - serialize a structure to json, jsonp, or xml.
 * RenderText - return a plaintext response.
 * Redirect - redirect to another action or URL
 * RenderFile - return a file, generally to be downloaded as an attachment.
@@ -65,7 +65,7 @@ handled as a local variable anyway.
   called from Actions.
 
 
-## RenderJson / RenderXml
+## RenderJson / RenderJsonP / RenderXml
 
 The application may call
 [`RenderJson`](../docs/godoc/controller.html#Controller.RenderJson) or
@@ -77,6 +77,10 @@ type (usually a struct).  Revel will serialize it using
 If `results.pretty=true` in `app.conf`, serialization will be done using
 `MarshalIndent` instead, to produce nicely indented output for human
 consumption.
+
+To generate a JsonP result, RenderJsonP may be called. The RenderJsonP call takes two
+arguments-- a string, representing the callback function name, and any other Go type,
+which will be serialized similarly to RenderJson.
 
 ## Redirect
 
